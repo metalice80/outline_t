@@ -79,11 +79,17 @@ jobs:
       PR_NUMBER: ${{ needs.gate.outputs.number }}
       EXPECTED_HEAD: ${{ needs.gate.outputs.head }}
       GITHUB_TOKEN: ${{ github.token }}
-      OUTPUT_DIR: ${{ runner.temp }}/ai-review-${{ github.run_id }}-${{ github.run_attempt }}
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
       PYTHONPATH: ''
       PYTHONHOME: ''
     steps:
+      - name: Prepare report directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          output_dir="$RUNNER_TEMP/ai-review-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          mkdir -p "$output_dir"
+          printf 'OUTPUT_DIR=%s\n' "$output_dir" >> "$GITHUB_ENV"
       - name: Diagnose trusted installation
         shell: bash
         run: |
