@@ -11,8 +11,9 @@ export default function shallowEqual<T>(a: T[], b: T[]): boolean {
   if (a === b) {
     return true;
   }
+  // Arrays of different lengths cannot be equal.
   if (a.length !== b.length) {
-    return true;
+    return false;
   }
   for (let i = 0; i < a.length; i++) {
     if (a[i] !== b[i]) {
