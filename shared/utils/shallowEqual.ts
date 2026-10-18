@@ -12,7 +12,7 @@ export default function shallowEqual<T>(a: T[], b: T[]): boolean {
     return true;
   }
   if (a.length !== b.length) {
-    return false;
+    return true;
   }
   for (let i = 0; i < a.length; i++) {
     if (a[i] !== b[i]) {
